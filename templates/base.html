@@ -9,6 +9,10 @@
     
     <!-- Bootstrap compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/cerulean/bootstrap.min.css">
+    
+    <!-- Font Awesome compiled and minified CSS -->
+    <link rel="stylesheet" href="{% static 'font-awesome/css/font-awesome.min.css' %}">
+    
     <!-- Own CSS -->
     <link rel="stylesheet" href="{% static 'css/custom.css' %}" type="text/css" />
     
@@ -16,10 +20,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
     
-    <title>{% block page_title %}{% endblock %}</title>
+    {% block head_js %}
+    {% endblock head_js %}
+    
+    <title>Ecommerce</title>
 </head>
 <body>
-    <!-- Fixed masthead -->
+    <!-- NavBar area -  Fixed masthead -->
     <nav class="navbar navbar-masthead navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -29,7 +36,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/">E-Commerce</a>
+                <a class="navbar-brand" href="/">Ecommerce</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
@@ -40,10 +47,20 @@
                         <li><a href="{% url 'register' %}">Register</a></li>
                         <li><a href="{% url 'login' %}">Log In</a></li>
                     {% endif %}
+                    <li>
+                        <a href="{% url 'view_cart' %}">
+                            <i class="fa fa-shipping-cart"></i>Cart
+                            {% if product_count > 0 %}
+                            <label class="badge badge-warning">{{ product_count }}</label>
+                            {% endif %}
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
     </nav>
+    
+    <!-- Messages area -->
     {% if messages %}
         <div class="alert alert-success">
             <div class="messages">
@@ -53,9 +70,19 @@
             </div>
         </div>
     {% endif %}
+    
+    <!-- Block content area -->
     <div class="container">
+        <div class="display">
+            <form action="{% url 'search' %}" method="get">
+                <input type="text" name="q">
+                <button type="search">Search</button>
+            </form>
+        </div>
         {% block content %} {% endblock %}
     </div>
+    
+    <!-- Footer area -->
     <footer>
         <div class="container">
             <p>Made by Code Institute bootcampers</p>
