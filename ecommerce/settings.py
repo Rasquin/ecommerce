@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
-import env
+import env.py
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -137,7 +137,7 @@ MEDIA_URL = '/media/'
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
-    'accounts.backends.CaseInsensitiveAuth'
+    'accounts.backends.EmailAuth'
     
     # in the ecommerce video they used --> 'accounts.backends.CaseInsensitiveAuth'
     # in the auth miniproject the video used --> 'accounts.backends.EmailAuth'
