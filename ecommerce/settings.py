@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 
 import os
 import env
+import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -143,7 +144,9 @@ AUTHENTICATION_BACKENDS = [
     # in the auth miniproject the video used --> 'accounts.backends.EmailAuth'
 ]
 
-STRIPE_PUBLISHABLE = os.getenv('STRIPE_PUBLISHABLE')
-STRIPE_SECRET = os.getenv('STRIPE_SECRET')
+#STRIPE_PUBLISHABLE = os.getenv('STRIPE_PUBLISHABLE')
+#STRIPE_SECRET = os.getenv('STRIPE_SECRET')
+STRIPE_PUBLISHABLE = env.STRIPE_PUBLISHABLE
+STRIPE_SECRET = env.STRIPE_SECRET
 
 MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"
