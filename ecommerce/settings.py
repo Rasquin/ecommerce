@@ -29,7 +29,7 @@ SECRET_KEY = env.SECRET_KEY
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [os.environ.get('AWSC9_HOSTNAME')]
+ALLOWED_HOSTS = [os.environ.get('AWSC9_HOSTNAME'), 'ecommerce-rasquin.herokuapp.com/']
 
 
 # Application definition
