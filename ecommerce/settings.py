@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
+# To deploy to heroku you need to uncomment inmport view. You comment it when testeing with travis
 import env
 import dj_database_url
 
@@ -86,15 +87,20 @@ WSGI_APPLICATION = 'ecommerce.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.sqlite3',
-#        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#    }
-#}
+if "DATABASE_URL" in os.environ:
+   #DATABASES = {'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))} --- segun video
+    DATABASES = {'default': dj_database_url.parse(env.DATABASE_URL)}
+else:
+    # So now Travis should be able to use the SQL database, as it does not have access to our cloud database.
+    print("Database URL not found. Using SQLite instead")
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
+    }
 
-#DATABASES = {'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))} --- segun video
-DATABASES = {'default': dj_database_url.parse(env.DATABASE_URL)}
+
 
 
 # Password validation
