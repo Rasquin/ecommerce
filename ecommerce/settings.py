@@ -24,8 +24,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-#SECRET_KEY = os.environ.get('SECRET_KEY') --> segun video
-SECRET_KEY = env.SECRET_KEY
+SECRET_KEY = os.environ.get('SECRET_KEY') # --> segun video
+#SECRET_KEY = env.SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -90,8 +90,8 @@ WSGI_APPLICATION = 'ecommerce.wsgi.application'
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
 if "DATABASE_URL" in os.environ:
-   #DATABASES = {'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))} --- segun video
-    DATABASES = {'default': dj_database_url.parse(env.DATABASE_URL)}
+   DATABASES = {'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))}# --- segun video
+   # DATABASES = {'default': dj_database_url.parse(env.DATABASE_URL)}
 else:
     # So now Travis should be able to use the SQL database, as it does not have access to our cloud database.
     print("Database URL not found. Using SQLite instead")
@@ -176,9 +176,9 @@ AUTHENTICATION_BACKENDS = [
     # in the auth miniproject the video used --> 'accounts.backends.EmailAuth'
 ]
 
-#STRIPE_PUBLISHABLE = os.getenv('STRIPE_PUBLISHABLE')
-#STRIPE_SECRET = os.getenv('STRIPE_SECRET')
-STRIPE_PUBLISHABLE = env.STRIPE_PUBLISHABLE
-STRIPE_SECRET = env.STRIPE_SECRET
+STRIPE_PUBLISHABLE = os.getenv('STRIPE_PUBLISHABLE')
+STRIPE_SECRET = os.getenv('STRIPE_SECRET')
+#STRIPE_PUBLISHABLE = env.STRIPE_PUBLISHABLE
+#STRIPE_SECRET = env.STRIPE_SECRET
 
 MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"
